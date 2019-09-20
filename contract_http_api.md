@@ -26,13 +26,13 @@ AccessId: 4DA36FFC61334695A66F8D29020EB589
 **GET类请求**
 
 ```
-http://127.0.0.1/perpetual/v1/market/depth?market=BTCUSD&merge=1
+http://api.coinex.com/perpetual/v1/market/depth?market=BTCUSD&merge=1
 ```
 
 **POST类请求**
 
 ```
-http://127.0.0.1/perpetual/v1/order/put_limit
+http://api.coinex.com/perpetual/v1/order/put_limit
 
 请求参数以multipart/form-data的方式放入http body中
 ```
@@ -336,26 +336,6 @@ http://127.0.0.1/perpetual/v1/order/put_limit
       ...
   ]
 }
-```
-
-**Self deal**
-
-* Request type: POST
-* Signature required: No
-* Request Url: https://api.coinex.com/perpetual/v1/market/self_deal
-* Request:
-
-| name | type | required | description |
-| ------ | ------ | ------ | ------ |
-| market | String | Y | |
-| side | Integer | Y | 1 for sell, 2 for buy |
-| amount | String | Y | |
-| price | String | Y | |
-
-* Data:
-
-```
-"data":  "success"
 ```
 
 **Market Kline**
