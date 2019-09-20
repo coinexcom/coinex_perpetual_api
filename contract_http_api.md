@@ -717,12 +717,54 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 }
 ```
 
-**Query order detail**
+**Query pending order detail**
 
 * Request type: GET
 * Signature required: Yes
 * Request Header: Authorization: "xxxx"，"Access_id": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/order_detail
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | 合约市场|
+| order_id | Integer | Y | 订单id |
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": {
+  'order_id': 10,
+  'position_id': 0,
+  'market': 'BTCUSD',
+  'type': 1,
+  'side': 2,
+  'target': 2,
+  'effect_type': 1,
+  'user_id': 10,
+  'create_time': 102001.123,
+  'update_time': 102003.123,
+  'source': 'API',
+  'price': '9100.1',
+  'amount': '100',
+  'taker_fee': '0.005',
+  'maker_fee': '-0.002',
+  'left': '80',         //未成交数量
+  'deal_stock': '0.9',  //已成交的价值
+  'deal_fee': '0.01',   //已使用手续费
+  'leverage': '10',     //杠杆
+  'position_type': 1   //仓位类型 1:逐仓 2:全仓
+}
+```
+
+**Query finished order detail**
+
+* Request type: GET
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/finished_detail
 * Params:
 
 | name | type | required | description |
