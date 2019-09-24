@@ -108,7 +108,9 @@ http://api.coinex.com/perpetual/v1/order/put_limit
     'fee_prec': 4,
     'stock_prec': 8,
     'money_prec': 8,
-    'multiplier': 1
+    'multiplier': 1,
+    'amount_prec': 0,
+    'amount_min': '10'
   }
 ]
 ```
@@ -617,6 +619,26 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 }
 ```
 
+**Cancel all pending order**
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/cancel_all
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | 合约市场 |
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": "success"
+```
+
 **Query pending order**
 
 * Request type: GET
@@ -664,6 +686,59 @@ http://api.coinex.com/perpetual/v1/order/put_limit
     ...
   ],
   "total": 10,
+  "offset": 10,
+  "limit": 5
+}
+```
+
+**Query finished order**
+
+* Request type: GET
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/finished
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | |
+| side | Integer | Y | 0 for no limit, 1 for sell, 2 for buy |
+| start_time | Integer | N | |
+| end_time | Integer | N | |
+| offset | Integer | Y | |
+| limit | Integer | Y | |
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": {
+  "records": [
+    {
+      'order_id': 10,
+      'position_id': 0,
+      'market': 'BTCUSD',
+      'type': 1,
+      'side': 2,
+      'target': 2,
+      'effect_type': 1,
+      'user_id': 10,
+      'create_time': 102001.123,
+      'update_time': 102003.123,
+      'source': 'API',
+      'price': '9100.1',
+      'amount': '100',
+      'taker_fee': '0.005',
+      'maker_fee': '-0.002',
+      'left': '80',         //未成交数量
+      'deal_stock': '0.9',  //已成交的价值
+      'deal_fee': '0.01',   //已使用手续费
+      'leverage': '10',     //杠杆
+      'position_type': 1   //仓位类型 1:逐仓 2:全仓
+    },
+    ...
+  ],
   "offset": 10,
   "limit": 5
 }
@@ -717,12 +792,12 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 }
 ```
 
-**Query pending order detail**
+**Query order status**
 
 * Request type: GET
 * Signature required: Yes
 * Request Header: Authorization: "xxxx"，"Access_id": "xxx"
-* Request Url: https://api.coinex.com/perpetual/v1/order/order_detail
+* Request Url: https://api.coinex.com/perpetual/v1/order/status
 * Params:
 
 | name | type | required | description |
@@ -756,48 +831,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
   'deal_fee': '0.01',   //已使用手续费
   'leverage': '10',     //杠杆
   'position_type': 1   //仓位类型 1:逐仓 2:全仓
-}
-```
-
-**Query finished order detail**
-
-* Request type: GET
-* Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
-* Request Url: https://api.coinex.com/perpetual/v1/order/finished_detail
-* Params:
-
-| name | type | required | description |
-| ------ | ------ | ------ | ------ |
-| market | String | Y | 合约市场|
-| order_id | Integer | Y | 订单id |
-| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
-| windowtime | Integer | N | 时间窗口，单位：毫秒|
-
-* Data:
-
-```
-"data": {
-  'order_id': 10,
-  'position_id': 0,
-  'market': 'BTCUSD',
-  'type': 1,
-  'side': 2,
-  'target': 2,
-  'effect_type': 1,
-  'user_id': 10,
-  'create_time': 102001.123,
-  'update_time': 102003.123,
-  'source': 'API',
-  'price': '9100.1',
-  'amount': '100',
-  'taker_fee': '0.005',
-  'maker_fee': '-0.002',
-  'left': '80',         //未成交数量
-  'deal_stock': '0.9',  //已成交的价值
-  'deal_fee': '0.01',   //已使用手续费
-  'leverage': '10',     //杠杆
-  'position_type': 1   //仓位类型 1:逐仓 2:全仓
+  'status': "not_deal" //not_deal: unexecuted; part_deal: partly executed; done: executed; cancel: cancelled;
 }
 ```
 
