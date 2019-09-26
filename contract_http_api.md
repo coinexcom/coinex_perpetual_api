@@ -934,39 +934,41 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
-| market | String | Y | 合约市场 |
+| market | String | N | 合约市场 |
 | timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
 | windowtime | Integer | N | 时间窗口，单位：毫秒|
 
 * Data:
 
 ```
-"data": {
-  'position_id': 1,
-  'create_time': 111.11,
-  'update_time': 222.11,
-  'market': 'BTCUSD',
-  'user_id': 2,
-  'type': 1, //1: 逐仓， 2:全仓
-  'side': 1, //1: 空仓， 2:多仓
-  'amount': '100',  //仓位数量
-  'amount_max': '120',  //历史最大仓位数量
-  'close_left': 20,     //剩余可平
-  'open_price': '100',  //平均开仓价格
-  'open_val': '0.1',    //累计开仓价值
-  'open_val_max': '0.2', //最大开仓价值
-  'open_margin': '0.01', //保证金率
-  'mainten_margin': '0.005', //维持保证金率
-  'mainten_margin_amount': '0.015', //维持保证金
-  'margin_amount': '1.2',  //保证金 起始保证金 + 追加保证金 - 转出保证金
-  'profit_real': '0.1',    //已实现盈亏
-  'profit_clearing': "-1.1", //待结算盈亏
-  'liq_price': '11.22'。     //强平价格
-  'bkr_price': '11',         //破产价格
-  'leverage': '10',   //杠杆
-  'adl_sort': 100,        //自动减仓排序
-  'total': 10             //持仓人数
-}
+"data": [
+  {
+    'position_id': 1,
+    'create_time': 111.11,
+    'update_time': 222.11,
+    'market': 'BTCUSD',
+    'user_id': 2,
+    'type': 1, //1: 逐仓， 2:全仓
+    'side': 1, //1: 空仓， 2:多仓
+    'amount': '100',  //仓位数量
+    'amount_max': '120',  //历史最大仓位数量
+    'close_left': 20,     //剩余可平
+    'open_price': '100',  //平均开仓价格
+    'open_val': '0.1',    //累计开仓价值
+    'open_val_max': '0.2', //最大开仓价值
+    'open_margin': '0.01', //保证金率
+    'mainten_margin': '0.005', //维持保证金率
+    'mainten_margin_amount': '0.015', //维持保证金
+    'margin_amount': '1.2',  //保证金 起始保证金 + 追加保证金 - 转出保证金
+    'profit_real': '0.1',    //已实现盈亏
+    'profit_clearing': "-1.1", //待结算盈亏
+    'liq_price': '11.22'。     //强平价格 当强平价格大于1000000000000时，返回"Infinity"
+    'bkr_price': '11',         //破产价格 当破产价格大于1000000000000时，返回"Infinity"
+    'leverage': '10',       //杠杆
+    'adl_sort': 100,        //自动减仓排序
+    'total': 10             //持仓人数
+  }
+]
 ```
 
 **Ajust position margin**
@@ -1008,8 +1010,8 @@ http://api.coinex.com/perpetual/v1/order/put_limit
   'margin_amount': '1.2',  //保证金 起始保证金 + 追加保证金 - 转出保证金
   'profit_real': '0.1',    //已实现盈亏
   'profit_clearing': "-1.1", //待结算盈亏
-  'liq_price': '11.22'。     //强平价格
-  'bkr_price': '11',         //破产价格
+  'liq_price': '11.22'。     //强平价格， 当强平价格大于1000000000000时，返回"Infinity"
+  'bkr_price': '11',         //破产价格, 当破产价格大于1000000000000时，返回"Infinity"
   'leverage': '10',   //杠杆
   'adl_sort': 100,        //自动减仓排序
   'total': 10             //持仓人数
