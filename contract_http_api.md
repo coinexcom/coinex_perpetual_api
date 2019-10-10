@@ -232,8 +232,8 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
 | market | String | Y | 合约市场，例如：“BTCUSD”合约市场 |
-| merge | String | Y | 精度合并，取值为：["0", "0.1", "0.01"]中的其中一个 |
-| limit | Integer | Y | 获取的条数，取值为：[5, 10, 20, 50]中的其中一个 |
+| merge | String | Y | 精度合并，取值为：["10", "1", "0", "0.1", "0.01"]中的其中一个 |
+| limit | Integer | Y | 获取的条数，取值为：[5, 10, 20, 50, 100]中的其中一个 |
 
 * Data:
 
