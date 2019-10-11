@@ -12,7 +12,7 @@ Authorization: 3e9e58c40d18358bb129c98139eec99af781275708895e522f572a87dc8d9137
 4.在http的头中增加AccessId,服务端根据AccessId寻找对应的用户信息
 AccessId: 4DA36FFC61334695A66F8D29020EB589
 
-5.服务端收到http报文后，根据AccessId找到用户的secret_key，进行上面同样的操作，判断收到的签名与自己计算的签名是否相等，如果相等则鉴权成功，否则失败。 
+5.服务端收到http报文后，根据AccessId找到用户的secret key，进行上面同样的操作，判断收到的签名与自己计算的签名是否相等，如果相等则鉴权成功，否则失败。 
 
 # 时间戳验证：
 *服务器收到请求时会判断请求中的时间戳timestamp，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间窗口值可以通过发送可选参数recvWindow来自定义。
@@ -384,7 +384,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/market/adjust_leverage
 * Params:
 
@@ -412,7 +412,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/asset/query
 * Params: None
 * Data:
@@ -443,7 +443,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/put_limit
 * Params:
 
@@ -488,7 +488,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/put_market
 * Params:
 
@@ -531,7 +531,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/put_stop_limit
 * Params:
 
@@ -557,7 +557,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/put_stop_market
 * Params:
 
@@ -581,7 +581,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/cancel
 * Params:
 
@@ -623,7 +623,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/cancel_all
 * Params:
 
@@ -643,7 +643,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/pending
 * Params:
 
@@ -695,7 +695,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/finished
 * Params:
 
@@ -748,7 +748,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/stop_pending
 * Params:
 
@@ -796,7 +796,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/status
 * Params:
 
@@ -839,7 +839,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/close_limit
 * Params:
 
@@ -884,7 +884,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/close_market
 * Request parameter:
 
@@ -928,7 +928,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: GET
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/position/pending
 * Params:
 
@@ -975,7 +975,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/position/adjust_margin
 * Params:
 
