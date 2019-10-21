@@ -1,9 +1,9 @@
 # 鉴权：
 1.http报文的输入的参数字符串如下：
-market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431
+market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431000
 
 2.在上面最后拼接secret_key得到如下：
-market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431&secret_key=B51068CF10B34E7789C374AB932696A05E0A629BE7BFC62F 
+market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431000&secret_key=B51068CF10B34E7789C374AB932696A05E0A629BE7BFC62F 
 备注：发送http报文体不需要带上secret_key参数，该步骤只是为了计算sha256签名。
 
 3.对上面字符串进行sha256即签名，转换为16进制小写，长度为64位，再把这个签名加入到http的头中如下：  
