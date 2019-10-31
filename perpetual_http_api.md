@@ -110,7 +110,9 @@ http://api.coinex.com/perpetual/v1/order/put_limit
     'money_prec': 8,
     'multiplier': 1,
     'amount_prec': 0,
-    'amount_min': '10'
+    'amount_min': '10',
+    'tick_size': '0.5', //价格最小增量
+    'leverages': ["3", "5", "8", "10", "15", "20", "30", "50", "100"]
   }
 ]
 ```
