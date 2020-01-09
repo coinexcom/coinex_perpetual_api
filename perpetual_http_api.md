@@ -456,6 +456,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 | amount | String | Y | 委托数量 |
 | price | String | Y | 委托价格 |
 | effect_type | Integer | N | 委托生效类型，1: 一直有效直至取消, 2: 立刻成交或取消, 3: 完全成交或取消。默认为1 |
+| option | Integer | N | 选项, 1:只下maker单。默认为0 |
 | timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
 | windowtime | Integer | N | 时间窗口，单位：毫秒|
 
@@ -546,6 +547,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 | stop_price | String | Y | 触发价格 |
 | price | String | Y | 委托价格 |
 | effect_type | Integer | N | 委托生效类型，1: 一直有效直至取消, 2: 立刻成交或取消, 3: 完全成交或取消。默认为1 |
+| option | Integer | N | 选项, 1:只下maker单。默认为0 |
 | timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
 | windowtime | Integer | N | 时间窗口，单位：毫秒|
 
@@ -852,6 +854,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 | amount | String | Yes | 平仓数量 |  |
 | price | String | Yes | 价格 |
 | effect_type | Integer | No | 委托生效类型，1: 一直有效直至取消, 2: 立刻成交或取消, 3: 完全成交或取消。默认为1 |
+| option | Integer | N | 选项, 1:只下maker单。默认为0 |
 | timestamp | Integer | Yes | 客户端时间戳，单位：毫秒|
 | windowtime | Integer | No | 时间窗口，单位：毫秒|
 
