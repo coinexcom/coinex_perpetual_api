@@ -407,6 +407,30 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 }
 ```
 
+**Get position amount**
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/market/position_expect
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | 合约市场|
+| price | String | Y | 价格 |
+| side | Integer | Y | 1 卖 2 买|
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": {
+  "position_expect": "10"    //预计可开仓位数
+}
+```
+
 
 ## Asset Api
 
