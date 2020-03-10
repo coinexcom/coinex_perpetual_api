@@ -450,14 +450,16 @@ http://api.coinex.com/perpetual/v1/order/put_limit
     "frozen": "10",    // 冻结
     "tranfer": "10",   // 可转
     "balance_total": "11", // 账户余额
-    "margin", "10" // 保证金
+    "margin", "10", // 保证金
+    "profit_unreal": "100" //未实现盈亏
   },
   "ETH": {
     "available": "250", // 可用余额
     "frozen": "10",    // 冻结
     "tranfer": "10",   // 可转
     "balance_total": "11", // 账户余额
-    "margin", "10" // 保证金
+    "margin", "10",// 保证金
+    "profit_unreal": "100" //未实现盈亏
   }
 }
 ```
