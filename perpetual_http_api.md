@@ -673,6 +673,65 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 "data": "success"
 ```
 
+**Cancel pending stop order**
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/cancel_stop
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | 合约市场 |
+| order_id | Integer | Y | 未完成订单ID |
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": {
+  'order_id': 10,
+  'market': 'BTCUSD',
+  'type': 1,
+  'side': 2,
+  'effect_type': 1, // 有效时间 1: 长效单, 2: 立即成交或取消, 3:全部成交或取消
+  'stop_type': 1,   // 触发方式 1: 最新成交价, 2: 指数价, 3: 标记价格
+  'user_id': 10,
+  'create_time': 102001.123,
+  'update_time': 102003.123,
+  'source': 'web',
+  'state': 1,
+  'stop_price': '9200',
+  'price': '9100.1',
+  'amount': '100',
+  'taker_fee': '0.005',
+  'maker_fee': '-0.002',
+}
+```
+
+**Cancel all pending stop order**
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/cancel_stop_all
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | 合约市场 |
+| side | Integer | N | 订单类型 |
+| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
+| windowtime | Integer | N | 时间窗口，单位：毫秒|
+
+* Data:
+
+```
+"data": "success"
+```
+
 **Query pending order**
 
 * Request type: GET

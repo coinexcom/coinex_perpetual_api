@@ -660,7 +660,7 @@
 }
 ```
 
-* Subscribe Asset
+* Subscribe position
 
 ```
 //Request
