@@ -504,7 +504,7 @@
   "method": "order.update", 
   "params": [
       3,      // event: event type，Integer, 1: PUT, 2: UPDATE, 3: FINISH
-      [{
+      {
         'order_id': 10,
         'market': 'BTCUSD',
         'type': 1,
@@ -519,12 +519,14 @@
         'amount': '100',
         'taker_fee': '0.005',
         'maker_fee': '-0.002',
+        'last_deal_amount': '100', //最新成交数量
+        'last_deal_price': '1000', //最新成交价格
         'left': '80',         //未成交数量
         'deal_stock': '0.9',  //已成交的价值
         'deal_fee': '0.01',   //已成交手续费
         'leverage': '10',     //杠杆
         'position_type': 1   //仓位类型 1:逐仓 2:全仓
-     }]
+     }
   ], 
   "id": null
 }
