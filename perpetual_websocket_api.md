@@ -525,7 +525,11 @@
         'deal_stock': '0.9',  //已成交的价值
         'deal_fee': '0.01',   //已成交手续费
         'leverage': '10',     //杠杆
-        'position_type': 1   //仓位类型 1:逐仓 2:全仓
+        'position_type': 1,   //仓位类型 1:逐仓 2:全仓
+        'last_deal_id': 1, //最新交易id
+        'last_deal_time': 1220003, //最新成交时间
+        'last_deal_type': 1,
+        'last_deal_role': 1 //1 maker, 2 taker
      }
   ], 
   "id": null
