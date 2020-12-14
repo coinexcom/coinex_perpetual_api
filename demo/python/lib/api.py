@@ -329,7 +329,7 @@ class CoinexPerpetualApi(object):
             profit_real	String	已实现盈亏
 
         # Request
-        POST https://api.coinex.com/perpetual/v1/account/asset
+        POST https://api.coinex.com/perpetual/v1/asset/query
         {
             'asset': ['BTC', 'ETH'],
             'access_id': 'BFFA64957AA240F6BBEA26FXXXX'
