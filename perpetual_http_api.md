@@ -103,6 +103,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 'data': [
   {
     'name': 'BTCUSD',
+    'type': 1, // 1: 正向合约, 2: 反向合约
     'stock': 'BTC',
     'money': 'USD',
     'fee_prec': 4,
