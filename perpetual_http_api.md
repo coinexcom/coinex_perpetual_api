@@ -34,7 +34,7 @@ http://api.coinex.com/perpetual/v1/market/depth?market=BTCUSD&merge=1
 ```
 http://api.coinex.com/perpetual/v1/order/put_limit
 
-请求参数以multipart/form-data的方式放入http body中
+请求参数以application/x-www-form-urlencoded的方式放入http body中
 ```
 
 # 响应报文体：
