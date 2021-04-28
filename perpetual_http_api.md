@@ -291,6 +291,40 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 ]
 ```
 
+**Market Funding History**
+
+* Request type: GET
+* Signature required: No
+* Request Url: https://api.coinex.com/perpetual/v1/market/funding_history
+* Request:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | |
+| start_time | Integer | N | |
+| end_time | Integer | N | |
+| offset | Integer | Y | |
+| limit | Integer | Y | |
+
+* Data:
+
+```
+"data": {
+	"offset": 10,
+	"limit": 100,
+	"records": [
+		{
+			'time': 1615233600.7274661,
+			'market': 'BTCUSD',
+			'asset': BTC,
+			'funding_rate': 0.00175,
+			'funding_rate_real': 0.00175
+		}
+   		...
+	]
+}
+```
+
 **User deals**
 
 * Request type: GET
