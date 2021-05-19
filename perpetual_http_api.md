@@ -624,32 +624,6 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 "data": "success"
 ```
 
-**Put stop market order**
-
-* Request type: POST
-* Signature required: Yes
-* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
-* Request Url: https://api.coinex.com/perpetual/v1/order/put_stop_market
-* Params:
-
-| name | type | required | description |
-| ------ | ------ | ------ | ------ |
-| market | String | Y | 合约市场 |
-| side | Integer | Y | 委托类型 1表示卖空，2表示买多|
-| stop_type | Integer | Y | 触发类型 1: 最新成交价格触发，2:标记价格触发，3: 指数价格触发|
-| amount | String | Y | 委托数量 |
-| stop_price | String | Y | 触发价格 |
-| use_cet | Integer | N | 是否使用cet抵扣手续费 1: 使用, 0: 不使用。默认为0|
-| client_id | String | N | 自定义id,限长64个字节,有效字符为大小写英文字母，数字, _ -|
-| timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
-| windowtime | Integer | No | 时间窗口，单位：毫秒|
-
-* Data:
-
-```
-"data": "success"
-```
-
 **Cancel pending order**
 
 * Request type: POST
