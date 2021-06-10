@@ -1080,6 +1080,48 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 ]
 ```
 
+**Query User Funding History**
+
+* Request type: GET
+* Signature required: Yes
+* Request Url: https://api.coinex.com/perpetual/v1/position/funding
+* Request:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | |
+| start_time | Integer | N | |
+| end_time | Integer | N | |
+| offset | Integer | Y | |
+| limit | Integer | Y | |
+
+* Data:
+
+```
+"data": {
+	"offset": 10,
+	"limit": 100,
+	"records": [
+		{
+			"user_id": 8888,
+			"time": 1622548800.916702,
+			"market": "BTCUSD",
+			"asset": "BTC",
+			"type": 1, //1: 支付, 2: 收取
+			"position_id": 1111,
+			"side": 1, //1: 空仓, 2: 多仓
+			"amount": "3500",
+			"price": "35000",
+			"funding_rate": "0.00175", //资金费率
+			"real_funding_rate": "0.00175", //真实资金费率
+			"funding": "-0.000175", //资金费用
+			"value": "0.1", //仓位价值
+		}
+   		...
+	]
+}
+```
+
 **Ajust position margin**
 
 * Request type: POST
