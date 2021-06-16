@@ -517,8 +517,7 @@ http://api.coinex.com/perpetual/v1/order/put_limit
 | amount | String | Y | 委托数量 |
 | price | String | Y | 委托价格 |
 | effect_type | Integer | N | 委托生效类型，1: 一直有效直至取消, 2: 立刻成交或取消, 3: 完全成交或取消。默认为1 |
-| option | Integer | N | 选项, 1:只下maker单。默认为0 |
-| use_cet | Integer | N | 是否使用cet抵扣手续费 1: 使用, 0: 不使用。默认为0|
+| option | Integer | N | 选项, 1:只下maker单, 2:隐藏委托。默认为0 |
 | client_id | String | N | 自定义id,限长64个字节,有效字符为大小写英文字母，数字, _ -|
 | timestamp | Integer | Y | 客户端时间戳，单位：毫秒|
 | windowtime | Integer | N | 时间窗口，单位：毫秒|
