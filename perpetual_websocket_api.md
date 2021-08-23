@@ -383,6 +383,8 @@
   "params":[
     "BTCUSD",              // market
     60                     //second for each cycle now supports: 1min,3min,5min,15min,30min,1hour,2hour,4hour,6hour,12hour,1day,3day,1week.
+    1629375022,            // start timestamp
+    1629720622             // end timestamp
   ],
   "id": 5
 }
