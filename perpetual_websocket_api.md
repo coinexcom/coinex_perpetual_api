@@ -1,12 +1,14 @@
-# 说明
-* **websocket地址是 wss://perpetual.coinex.com/**
+# API Invocation Instruction
+* **websocket url wss://perpetual.coinex.com/**
 
-* **在一个连接中如果对同一个数据重复订阅，前一个订阅会被取消**
+* **If you repeat a subscription to the same data in a connection, the previous subscription will be cancelled**
 
-* 请求参数: 
+* Request Parameters: 
  	1. method: method, String.
 	2. params: parameter, Array.
   3. id: Request id, Integer
+
+> Request Demo: 
 
 ```
 {
@@ -16,11 +18,13 @@
 }
 ```
 
-* 返回结果
+* Response
 
 	1. result: Json object, null for failure.
 	2. error: Json objesct, null for success, non-null for failure.
 	3. id: Request id, Integer.
+
+> Response Demo:
 
 ```
 //success
@@ -51,11 +55,13 @@
 
 ```
 
-* **推送**
+* **Push**
 	
 	1. method: method, String
-   2. params: parameter, Array
-   3. id: Null
+  2. params: parameter, Array
+  3. id: Null
+
+> Push Demo:
 
 ```
 {
@@ -72,8 +78,13 @@
 ## Server Sign
 
 * method: "server.sign"
-* params: 见示例
+* params: 
+  1. access_id
+  2. sign data, use sha256 algorithm to encrypt the signature string access_id={access_id}&timestamp={timestamp}&secret_key={secret_key} and convert encrypted string to 64 lowercase characters.
+  3. timestamp, the timestamp is in milliseconds and the difference between the timestamp and the server timestamp should not be greater than 1 minute.
 * example:
+
+> Authorization Demo:
 
 ```
 //Request
@@ -81,8 +92,8 @@
   "method":"server.sign",
   "params": [
     "4DA36FFC61334695A66F8D29020EB589", //access_id
-    "3e9e58c40d18358bb129c98139eec99af781275708895e522f572a87dc8d9137", //sign data, 对字符串access_id={access_id}&timestamp={timestamp}&secret_key={secret_key} 做sha256计算，转换为16进制小写，长度为64位
-    1513746038205  //timestamp for milliseconds spent from Unix epoch to current time and error between tonce and server time can not exceed plus or minus 1min
+    "3e9e58c40d18358bb129c98139eec99af781275708895e522f572a87dc8d9137", //sign data
+    1513746038205  //timestamp
   ],
   "id": 15,
  }
@@ -152,7 +163,7 @@
 {
   "method":"state.query",
   "params":[
-    "BTCUSD",           // 市场
+    "BTCUSD",           // Market
      86400,             // cycle period，Integer, e.g. 86400 for last 24 hours
   ],
   "id":15
@@ -170,15 +181,15 @@
      "open":"434.11", //open price
      "period":86400,  //cycle period
      "volume":"3624.85992531" //volume
-     "funding_time": 10, //距离下次资金费用时间，分钟
-     "position_amount": "100", //当前持仓量
-     "funding_rate_last": "0.001", //上次资金费用
-     "funding_rate_next": "0.001", //预测资金费用
-     "insurance": "1000", //当前保险基金
-     "sign_price": "100", //标记价格
-     "index_price": "200", //指数价格
-     "sell_total": "", //过去1000笔成交中卖的数量
-     "buy_total": "" //过去1000笔成交中买的数量
+     "funding_time": 10, //xx mins before next funding time
+     "position_amount": "100", //current positions
+     "funding_rate_last": "0.001", //last funding rate
+     "funding_rate_next": "0.001", //estimated funding rate
+     "insurance": "1000", //current insurance fund
+     "sign_price": "100", //signed price
+     "index_price": "200", //index price
+     "sell_total": "", //total selling in 1000 executed deals
+     "buy_total": "" // total buying in 1000 executed deals
   },
   "id": 15
  }
@@ -202,23 +213,23 @@
   "params": [
        {
         "BTCUSD": {
-           "close":"430.33", //close price
-           "deal":"1574489.5181782117",  //value
-           "high":"445.68", //highest price
-           "last":"430.33", //latest price
-           "low":"420.32",  //lowest price
-           "open":"434.11", //open price
-           "period":86400,  //cycle period
-           "volume":"3624.85992531" //volume
-           "funding_time": 10, //距离下次资金费用时间，分钟
-           "position_amount": "100", //当前持仓量
-           "funding_rate_last": "0.001", //上次资金费用
-           "funding_rate_next": "0.001", //预测资金费用
-           "insurance": "1000", //当前保险基金
-           "sign_price": "100", //标记价格
-           "index_price": "200", //指数价格
-           "sell_total": "", //过去1000笔成交中卖的数量
-           "buy_total": "" //过去1000笔成交中买的数量
+          "close":"430.33", //close price
+          "deal":"1574489.5181782117",  //value
+          "high":"445.68", //highest price
+          "last":"430.33", //latest price
+          "low":"420.32",  //lowest price
+          "open":"434.11", //open price
+          "period":86400,  //cycle period
+          "volume":"3624.85992531" //volume
+          "funding_time": 10, //xx mins before next funding time
+          "position_amount": "100", //current positions
+          "funding_rate_last": "0.001", //last funding rate
+          "funding_rate_next": "0.001", //estimated funding rate
+          "insurance": "1000", //current insurance fund
+          "sign_price": "100", //signed price
+          "index_price": "200", //index price
+          "sell_total": "", //total selling in 1000 executed deals
+          "buy_total": "" // total buying in 1000 executed deals
         },
     }
   ], 
@@ -236,8 +247,8 @@
   "method":"depth.query",
   "params":[
     "BTCUSD",           //market
-    20,                 //limit int, [5, 10, 20, 50, 100]中的其中一个
-    "0"                 //interval String ["10", "1", "0", "0.1", "0.01"]的其中一个 
+    20,                 //limit, Int, one of the following: [5, 10, 20, 50, 100]
+    "0"                 //interval, String one of the following: ["10", "1", "0", "0.1", "0.01"]
   ],
   "id":15
 }
@@ -414,7 +425,7 @@
   "method":"kline.subscribe",
   "params":[
     "BTCUSD",              // market
-    60                     //second for each cycle now supports: 1min,3min,5min,15min,30min,1hour,2hour,4hour,6hour,12hour,1day,3day,1week.
+    60                     // second for each cycle now supports: 1min,3min,5min,15min,30min,1hour,2hour,4hour,6hour,12hour,1day,3day,1week.
   ],
   "id": 5
 }
@@ -479,11 +490,11 @@
         'amount': '100',
         'taker_fee': '0.005',
         'maker_fee': '-0.002',
-        'left': '80',         //未成交数量
-        'deal_stock': '0.9',  //已成交的价值
-        'deal_fee': '0.01',   //已成交手续费
-        'leverage': '10',     //杠杆
-        'position_type': 1   //仓位类型 1:逐仓 2:全仓
+        'left': '80',         // unexecuted amount
+        'deal_stock': '0.9',  // executed value
+        'deal_fee': '0.01',   // executed tx fees
+        'leverage': '10',     // leverage
+        'position_type': 1    // position type 1: isolated margin 2: cross margin
       }
     ]
   },
@@ -521,17 +532,17 @@
         'amount': '100',
         'taker_fee': '0.005',
         'maker_fee': '-0.002',
-        'last_deal_amount': '100', //最新成交数量
-        'last_deal_price': '1000', //最新成交价格
-        'left': '80',         //未成交数量
-        'deal_stock': '0.9',  //已成交的价值
-        'deal_fee': '0.01',   //已成交手续费
-        'leverage': '10',     //杠杆
-        'position_type': 1,   //仓位类型 1:逐仓 2:全仓
-        'last_deal_id': 1, //最新交易id
-        'last_deal_time': 1220003, //最新成交时间
+        'last_deal_amount': '100', // latest deal volumn
+        'last_deal_price': '1000', // latest deal price
+        'left': '80',         // unexecuted amount
+        'deal_stock': '0.9',  // executed value
+        'deal_fee': '0.01',   // executed tx fees
+        'leverage': '10',     // leverage
+        'position_type': 1,   // position type 1: isolated margin 2: cross margin
+        'last_deal_id': 1,    // latest deal id
+        'last_deal_time': 1220003, // latest deal time
         'last_deal_type': 1,
-        'last_deal_role': 1 //1 maker, 2 taker
+        'last_deal_role': 1   // 1 maker, 2 taker
      }
   ], 
   "id": null
@@ -557,18 +568,18 @@
   "error": null, 
   "result": {
     "BCH": {
-          "available": "250", // 可用余额
-          "frozen": "10",    // 冻结
-          "tranfer": "10",   // 可转
-          "balance_total": "11", // 账户余额
-          "margin", "10" // 保证金
+          "available": "250", // available balance
+          "frozen": "10",     // frozen
+          "tranfer": "10",    // transferable
+          "balance_total": "11", // account balance
+          "margin", "10" // margin
     },
     "BTC":{
-          "available": "250", // 可用余额
-          "frozen": "10",    // 冻结
-          "tranfer": "10",   // 可转
-          "balance_total": "11", // 账户余额
-          "margin", "10" // 保证金
+          "available": "250", // available balance
+          "frozen": "10",     // frozen
+          "tranfer": "10",    // transferable
+          "balance_total": "11", // account balance
+          "margin", "10" // margin
     }
   },
   "id": 15
@@ -592,11 +603,11 @@
   "params": [
     {
       "BCH": {
-          "available": "250", // 可用余额
-          "frozen": "10",    // 冻结
-          "tranfer": "10",   // 可转
-          "balance_total": "11", // 账户余额
-          "margin", "10" // 保证金
+          "available": "250", // available balance
+          "frozen": "10",     // frozen
+          "tranfer": "10",    // transferable
+          "balance_total": "11", // account balance
+          "margin", "10" // margin
       }
     }
   ], 
@@ -629,36 +640,35 @@
       'update_time': 222.11,
       'market': 'BTCUSD',
       'user_id': 2,
-      'type': 1, //1:逐仓, 2:全仓
+      'type': 1, //1: Isolated Margin, 2: Cross Margin
       'finish_type': 2,
-      'side': 1, //1:空仓, 2:多仓
+      'side': 1, //1:Sell, 2:Buy
       'sys': 0,
-      'amount': '100', 仓位数量
-      'amount_max': '120', // 历史最大仓位数
-      'close_left': 20, //剩余可平
-      'open_price': '100', //开仓均价
-      'open_val': '0.1', // 累计开仓价值即仓位价值
-      'open_val_max': '0.2', // 历史最大开仓价值
-      'open_margin': '0.01', // 开仓保证金率
+      'amount': '100', // position amount
+      'amount_max': '120', // Max. Position Amount
+      'close_left': 20, // Positions left to close
+      'open_price': '100', // Avg. Opening Price
+      'open_val': '0.1', // Cumulative Opening Value
+      'open_val_max': '0.2', // Max. Opening Value
+      'open_margin': '0.01', // Margin Rate
       'open_margin_imply': '0',
-      'mainten_margin': '0.005', // 维持保证金率
-      'mainten_margin_amount': '0.015', //维持保证金数
-      'margin_amount': '1.2',  //保证金
-      'profit_real': '0.1', // 已实现盈亏
-      'profit_clearing': "-1.1", // 待结算盈亏
-      'adl_sort_val': '1.1', // 自动减仓排序指标
+      'mainten_margin': '0.005', // Maintenance Margin Rate
+      'mainten_margin_amount': '0.015', // Maintenance Margin Amount
+      'margin_amount': '1.2',  // Margin Amount
+      'profit_real': '0.1', // Realized PNL
+      'profit_clearing': "-1.1", // Unrealized PNL
+      'adl_sort_val': '1.1', // Sort Auto-leveraging 
       'liq_time': 111.11,
       'liq_order_time': 222.22,
-      'liq_amount': '10', //强平仓位数
-      'liq_profit': '0.1', // 强平产生的盈亏
+      'liq_amount': '10',  // Forced Liquidation Amount
+      'liq_profit': '0.1', // Forced Liquidation PNL
       'liq_order_price': '11.11', 
-      'liq_price': '11.22' // 强平价格
+      'liq_price': '11.22' // Forced Liquidation Price
       'liq_price_imply': '0',
-      'bkr_price': '11', // 破产价格
+      'bkr_price': '11', // Bankruptcy Price
       'bkr_price_imply': '0',
-      'leverage': '10', //当前杠杆
-      'adl_sort': 100, // 自动减仓排序
-      'total': 10 // 仓位总数
+      'leverage': '10', // Current Leverage
+      'total': 10 // Total Positions': '100', Position Amount
     },
     {
       //position detail
