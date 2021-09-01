@@ -5,11 +5,11 @@
 > Example:
 
 ```
-1. The input parameter string of http message is as follows:  
-market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431000
+1. The input parameter string of http message is as follows:
+market=BTCUSD&type=buy&price=680&amount=1.0&timestamp=1550743431000
 
-2. At the end of the above message, splice the secret_key to get the following: 
-market=BTCUSD&type=buy&price=680&amount=1.0&time=1550743431000&secret_key=B51068CF10B34E7789C374AB932696A05E0A629BE7BFC62F 
+2. At the end of the above message, splice the secret_key to get the following:
+market=BTCUSD&type=buy&price=680&amount=1.0&timestamp=1550743431000&secret_key=B51068CF10B34E7789C374AB932696A05E0A629BE7BFC62F
 Note: The secret_key parameter is not required when sending http message. This step is only used to calculate sha256 signature.
 
 3. Perform sha256 signature to the above string, convert it to hexadecimal lowercase with a length of 64 bits, and add this signature to the header of http as follows:
@@ -18,28 +18,28 @@ Authorization: 3e9e58c40d18358bb129c98139eec99af781275708895e522f572a87dc8d9137
 4. Add AccessId to the header of http, and the server will search the corresponding user information according to the AccessId.
 AccessId: 4DA36FFC61334695A66F8D29020EB589
 
-5. After receiving the http message, the server will find the user's secret key according to AccessId, conduct the same operation as above and judge whether the received signature is equal to the one calculated by itself. If they are equal, the authorization is successful, otherwise it fails. 
+5. After receiving the http message, the server will find the user's secret key according to AccessId, conduct the same operation as above and judge whether the received signature is equal to the one calculated by itself. If they are equal, the authorization is successful, otherwise it fails.
 
 ```
 
 # Timestamp Verification
 
-When the server receives the request, it will judge the timestamp in the request. The request will be considered invalid if it was sent 5000 milliseconds ago. This window time value can be defined by sending the optional parameter recvWindow. 
+When the server receives the request, it will judge the timestamp in the request. The request will be considered invalid if it was sent 5000 milliseconds ago. This window time value can be defined by sending the optional parameter recvWindow.
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
 | timestamp | Integer | Y | Timestamp in milliseconds |
-| windowtime | Integer | N | Window time in milliseconds | 
+| windowtime | Integer | N | Window time in milliseconds |
 
 # Request
 
-**GET**
+### GET
 
 ```
 http://api.coinex.com/perpetual/v1/market/depth?market=BTCUSD&merge=1
 ```
 
-**POST**
+### POST
 
 ```
 http://api.coinex.com/perpetual/v1/order/put_limit
@@ -76,7 +76,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 
 # System Api
 
-**Ping**
+### Ping
 
 * Request type: GET
 * Signature required: No
@@ -88,7 +88,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 "data": "pong"
 ```
 
-**System Time**
+### System Time
 
 * Request type: GET
 * Signature required: No
@@ -100,8 +100,8 @@ Request parameters are put into http body in the form of application/x-www-form-
 "data": 11111123455 // millisecond
 ```
 # Market Api
- 
-**Market List**
+
+### Market List
 
 * Request type: GET
 * Signature required: No
@@ -128,13 +128,13 @@ Request parameters are put into http body in the form of application/x-www-form-
 ]
 ```
 
-**Market Limit config**
- 
+### Market Limit config
+
 * Request type: GET
 * Signature required: No
 * Request Url: https://api.coinex.com/perpetual/v1/market/limit_config
 * Params: none
-* Data: 
+* Data:
 
 ```
 'data': {
@@ -155,12 +155,12 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Market Ticker**
+### Market Ticker
 
 * Request type: GET
 * Signature required: No
 * Request Url: https://api.coinex.com/perpetual/v1/market/ticker
-* Params: 
+* Params:
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
@@ -196,7 +196,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Market Ticker All**
+### Market Ticker All
 
 * Request type: GET
 * Signature required: No
@@ -235,12 +235,12 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Market Depth**
+### Market Depth
 
 * Request type: GET
 * Signature required: No
 * Request Url: https://api.coinex.com/perpetual/v1/market/depth
-* Params: 
+* Params:
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
@@ -272,7 +272,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Market deals**
+### Market deals
 
 * Request type: GET
 * Signature required: No
@@ -301,7 +301,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 ]
 ```
 
-**Market Funding History**
+### Market Funding History
 
 * Request type: GET
 * Signature required: No
@@ -320,22 +320,22 @@ Request parameters are put into http body in the form of application/x-www-form-
 
 ```
 "data": {
-	"offset": 10,
-	"limit": 100,
-	"records": [
-		{
-			'time': 1615233600.7274661,
-			'market': 'BTCUSD',
-			'asset': BTC,
-			'funding_rate': 0.00175,
-			'funding_rate_real': 0.00175
-		}
-   		...
-	]
+  "offset": 10,
+  "limit": 100,
+  "records": [
+    {
+      'time': 1615233600.7274661,
+      'market': 'BTCUSD',
+      'asset': BTC,
+      'funding_rate': 0.00175,
+      'funding_rate_real': 0.00175
+    }
+       ...
+  ]
 }
 ```
 
-**User deals**
+### User deals
 
 * Request type: GET
 * Signature required: No
@@ -359,7 +359,7 @@ Request parameters are put into http body in the form of application/x-www-form-
   "limit": 100,
   "records": [
     {
-      'id': 1, 
+      'id': 1,
       'time': 102001.123,
       'deal_type': 1, //1 open position, 2 add position, 3 sub position, 4 close position, 5 sys close, 6 position liq, 7 position adl
       'market': 'BTCUSD',
@@ -379,7 +379,7 @@ Request parameters are put into http body in the form of application/x-www-form-
       'deal_fee': '0.001',
       'deal_margin': '20',  // Margin of transaction
       'fee_rate': '0.02',
-      'deal_profit': '100',      
+      'deal_profit': '100',
       'deal_insurance': '0.004' // Consumed or increased Insurance Fund
     }
       ...
@@ -387,7 +387,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Market Kline**
+### Market Kline
 
 * Request type: GET
 * Signature required: No
@@ -416,18 +416,18 @@ Request parameters are put into http body in the form of application/x-www-form-
   ],
   [
     1440308701,   # Time
-    233.31,       # Opening Price 
+    233.31,       # Opening Price
     233.41,       # Closing Price
     243.31,       # Highest Price
     223.41,       # Lowest Price
-    51，          # Trading Volume 
+    51，          # Trading Volume
     21.2810015    # Trading Value
     "BTCUSD"    # Market Name
   ]
 ]
 ```
 
-**Ajust leverage**
+### Ajust leverage
 
 * Request type: POST
 * Signature required: Yes
@@ -452,11 +452,11 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Get position amount**
+### Get position amount
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/market/position_expect
 * Params:
 
@@ -477,9 +477,9 @@ Request parameters are put into http body in the form of application/x-www-form-
 ```
 
 
-## Asset Api
+# Asset Api
 
-**asset query**
+### asset query
 
 * Request type: GET
 * Signature required: Yes
@@ -510,9 +510,9 @@ Request parameters are put into http body in the form of application/x-www-form-
 ```
 
 
-## Order Api
+# Order Api
 
-**Put limit order**
+### Put limit order
 
 * Request type: POST
 * Signature required: Yes
@@ -555,11 +555,12 @@ Request parameters are put into http body in the form of application/x-www-form-
   'deal_stock': '0.9',  // Executed Value
   'deal_fee': '0.01',   // Used Tx Fees
   'leverage': '10',     // Leverage
-  'position_type': 1    // Position Type 1: Isolated Margin 2: Cross Margin
+  'position_type': 1,    // Position Type 1: Isolated Margin 2: Cross Margin
+  'stop_id': 0         // Stop Order ID
 }
 ```
 
-**Put market order**
+### Put market order
 
 * Request type: POST
 * Signature required: Yes
@@ -597,13 +598,105 @@ Request parameters are put into http body in the form of application/x-www-form-
   'maker_fee': '-0.002',
   'left': '80',         // Unexecuted Amount
   'deal_stock': '0.9',  // Executed Value
-  'deal_fee': '0.01',   // Used Tx Fees 
-  'leverage': '10',     // Leverage 
-  'position_type': 1    // Position Type 1: Isolated Margin, 2: Cross Margin
+  'deal_fee': '0.01',   // Used Tx Fees
+  'leverage': '10',     // Leverage
+  'position_type': 1,    // Position Type 1: Isolated Margin, 2: Cross Margin
+  'stop_id': 0         // Stop Order ID
 }
 ```
 
-**Put stop limit order**
+### Put limit close order
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/close_limit
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Yes | Perpetual Market |
+| position_id | Integer | Yes | Position ID |
+| amount | String | Yes | Closing Amount|  |
+| price | String | Yes | Price |
+| effect_type | Integer | No |  Effect Type, 1: GTC Order, 2: IOC Order, 3: FOK Order. "GTC Order" is set by default. |
+| option | Integer | N | Option, 1: Maker Only. The default is "0".  |
+| timestamp | Integer | Yes | Timestamp in milliseconds|
+| windowtime | Integer | No | Window time in milliseconds|
+
+
+* Data:
+
+```
+"data": {
+  'order_id': 10,
+  'position_id': 0,
+  'market': 'BTCUSD',
+  'type': 1,
+  'side': 2,
+  'target': 2,
+  'effect_type': 1,
+  'user_id': 10,
+  'create_time': 102001.123,
+  'update_time': 102003.123,
+  'source': 'API',
+  'price': '9100.1',
+  'amount': '100',
+  'taker_fee': '0.005',
+  'maker_fee': '-0.002',
+  'left': '80',         // Unexecuted Amount
+  'deal_stock': '0.9',  // Executed Value
+  'deal_fee': '0.01',   // Used Tx Fees
+  'leverage': '10',     // Leverage
+  'position_type': 1,    // Position Type 1: Isolated Margin 2: Cross Margin
+  'stop_id': 0          // Stop Order ID
+}
+```
+
+### Put market close order
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/close_market
+* Request parameter:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Yes | Perpetual Market |
+| position_id | Integer | Yes | Position ID |
+| timestamp | Integer | Yes | Timestamp in milliseconds|
+| windowtime | Integer | No | Window time in milliseconds|
+
+* Data:
+
+```
+"data": {
+  'order_id': 10,
+  'position_id': 0,
+  'market': 'BTCUSD',
+  'type': 1,
+  'side': 2,
+  'target': 2,
+  'effect_type': 1,
+  'user_id': 10,
+  'create_time': 102001.123,
+  'update_time': 102003.123,
+  'source': 'API',
+  'price': '9100.1',
+  'amount': '100',
+  'taker_fee': '0.005',
+  'maker_fee': '-0.002',
+  'left': '80',         // Unexecuted Amount
+  'deal_stock': '0.9',  // Executed Value
+  'deal_fee': '0.01',   // Used Tx Fees
+  'leverage': '10',     // Leverage
+  'position_type': 1,   // Position Type 1: Isolated Margin 2: Cross Margin
+  'stop_id': 0         // Stop Order ID
+}
+```
+
+### Put stop limit order
 
 * Request type: POST
 * Signature required: Yes
@@ -631,7 +724,32 @@ Request parameters are put into http body in the form of application/x-www-form-
 "data": "success"
 ```
 
-**Cancel pending order**
+### Put stop market order
+
+* Request type: POST
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/put_stop_market
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | Perpetual Market |
+| side | Integer | Y | Side, 1: Sell for Short, 2: Buy for Long|
+| stop_type | Integer | Y | Stop Type 1: Trigger at the latest price 2: Trigger at the mark price 3: Trigger at the index price|
+| amount | String | Y | Delegation Amount |
+| stop_price | String | Y | Stop Price |
+| client_id | String | N | You can customize order IDs to identify your orders. The system supports alphabets + numbers(case-sensitive，e.g:A123、a123), or alphabets (case-sensitive，e.g:Abc、abc) only|
+| timestamp | Integer | Y | Timestamp in milliseconds|
+| windowtime | Integer | No | Window time in milliseconds|
+
+* Data:
+
+```
+"data": "success"
+```
+
+### Cancel pending order
 
 * Request type: POST
 * Signature required: Yes
@@ -669,11 +787,12 @@ Request parameters are put into http body in the form of application/x-www-form-
   'deal_stock': '0.9',  // Executed Value
   'deal_fee': '0.01',   // Used Tx Fees
   'leverage': '10',     // Leverage
-  'position_type': 1   // Position Type 1: Isolated Margin 2: Cross Margin
+  'position_type': 1,   // Position Type 1: Isolated Margin 2: Cross Margin
+  'stop_id': 0         // Stop Order ID
 }
 ```
 
-**Cancel all pending order**
+### Cancel all pending order
 
 * Request type: POST
 * Signature required: Yes
@@ -694,11 +813,11 @@ Request parameters are put into http body in the form of application/x-www-form-
 "data": "success"
 ```
 
-**Cancel pending stop order**
+### Cancel pending stop order
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/cancel_stop
 * Params:
 
@@ -732,11 +851,11 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Cancel all pending stop order**
+### Cancel all pending stop order
 
 * Request type: POST
 * Signature required: Yes
-* Request Header: Authorization: "xxxx"，"Access_id": "xxx"
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
 * Request Url: https://api.coinex.com/perpetual/v1/order/cancel_stop_all
 * Params:
 
@@ -753,7 +872,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 "data": "success"
 ```
 
-**Query pending order**
+### Query pending order
 
 * Request type: GET
 * Signature required: Yes
@@ -794,8 +913,9 @@ Request parameters are put into http body in the form of application/x-www-form-
       'left': '80',         // Unexecuted Amount
       'deal_stock': '0.9',  // Executed Value
       'deal_fee': '0.01',   // Used Tx Fees
-      'leverage': '10',     // Leverage  
-      'position_type': 1    // Position Type 1: Isolated Margin 2: Cross Margin
+      'leverage': '10',     // Leverage
+      'position_type': 1,    // Position Type 1: Isolated Margin 2: Cross Margin
+      'stop_id': 0          // Stop Order ID
     },
     ...
   ],
@@ -805,7 +925,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Query finished order**
+### Query finished order
 
 * Request type: GET
 * Signature required: Yes
@@ -848,8 +968,9 @@ Request parameters are put into http body in the form of application/x-www-form-
       'left': '80',         // Unexecuted Amount
       'deal_stock': '0.9',  // Executed Value
       'deal_fee': '0.01',   // Used Tx Fees
-      'leverage': '10',     // Leverage 
-      'position_type': 1   // Position Type 1: Isolated Margin 2: Cross Margin
+      'leverage': '10',     // Leverage
+      'position_type': 1,   // Position Type 1: Isolated Margin 2: Cross Margin
+      'stop_id': 0         // Stop Order ID
     },
     ...
   ],
@@ -858,7 +979,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Query pending stop order**
+### Query pending stop order
 
 * Request type: GET
 * Signature required: Yes
@@ -886,7 +1007,7 @@ Request parameters are put into http body in the form of application/x-www-form-
       'type': 1,
       'side': 2,
       'effect_type': 1, // Effect Type, 1: GTC Order, 2: IOC Order, 3: FOK Order. "GTC Order" is set by default.
-      'stop_type': 1,   // Stop Type 1: Trigger at the latest price 2: Trigger at the mark price 3: Trigger at 
+      'stop_type': 1,   // Stop Type 1: Trigger at the latest price 2: Trigger at the mark price 3: Trigger at
       'user_id': 10,
       'create_time': 102001.123,
       'update_time': 102003.123,
@@ -906,7 +1027,58 @@ Request parameters are put into http body in the form of application/x-www-form-
 }
 ```
 
-**Query order status**
+### Query finished stop order
+
+* Request type: GET
+* Signature required: Yes
+* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
+* Request Url: https://api.coinex.com/perpetual/v1/order/stop_finished
+* Params:
+
+| name | type | required | description |
+| ------ | ------ | ------ | ------ |
+| market | String | Y | Perpetual Market, e.g. BTCUSD|
+| side | Integer | Y | 0:All 1: Sell, 2: Buy |
+| start_time | Integer | N | |
+| end_time | Integer | N | |
+| offset | Integer | Y | |
+| limit | Integer | Y | |
+| timestamp | Integer | Y | Timestamp in milliseconds|
+| windowtime | Integer | N | Window time in milliseconds|
+
+* Data:
+
+```
+"data": {
+  "records": [
+    {
+    'order_id': 10,
+    'market': 'BTCUSD',
+    'type': 1,
+    'side': 2,
+    'effect_type': 1, // Effect Type, 1: GTC Order, 2: IOC Order, 3: FOK Order. "GTC Order" is set by default.
+    'stop_type': 1,   // Stop Type 1: Trigger at the latest price 2: Trigger at the mark price 3: Trigger at
+    'user_id': 10,
+    'create_time': 102001.123,
+    'update_time': 102003.123,
+    'source': 'web',
+    'client_id': 'abc',
+    'state': 1,
+    'stop_price': '9200',
+    'price': '9100.1',
+    'amount': '100',
+    'taker_fee': '0.005',
+    'maker_fee': '-0.002',
+    'status': 1 // 1: actived, 2: failed, 3: cancel
+    },
+    ...
+  ],
+  "offset": 10,
+  "limit": 5
+}
+```
+
+### Query order status
 
 * Request type: GET
 * Signature required: Yes
@@ -943,104 +1115,56 @@ Request parameters are put into http body in the form of application/x-www-form-
   'left': '80',         // Unexecuted Amount
   'deal_stock': '0.9',  // Executed Value
   'deal_fee': '0.01',   // Used Tx Fees
-  'leverage': '10',     // Leverage 
-  'position_type': 1    // Position Type 1: Isolated Margin 2: Cross Margin
+  'leverage': '10',     // Leverage
+  'position_type': 1,   // Position Type 1: Isolated Margin 2: Cross Margin
+  'stop_id': 0,         // Stop Order ID
   'status': "not_deal"  // not_deal: unexecuted; part_deal: partly executed; done: executed; cancel: cancelled;
 }
 ```
 
-**Put limit close order**
+### Query stop_order status
 
-* Request type: POST
+* Request type: GET
 * Signature required: Yes
 * Request Header: Authorization: "xxxx"，"AccessId": "xxx"
-* Request Url: https://api.coinex.com/perpetual/v1/order/close_limit
+* Request Url: https://api.coinex.com/perpetual/v1/order/stop_status
 * Params:
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
-| market | String | Yes | Perpetual Market |
-| position_id | Integer | Yes | Position ID |
-| amount | String | Yes | Closing Amount|  |
-| price | String | Yes | Price |
-| effect_type | Integer | No |  Effect Type, 1: GTC Order, 2: IOC Order, 3: FOK Order. "GTC Order" is set by default. |
-| option | Integer | N | Option, 1: Maker Only. The default is "0".  |
-| timestamp | Integer | Yes | Timestamp in milliseconds|
-| windowtime | Integer | No | Window time in milliseconds|
-
+| market | String | Y | Perpetual Market|
+| order_id | Integer | Y | Order ID |
+| timestamp | Integer | Y | Timestamp in milliseconds|
+| windowtime | Integer | N | Window time in milliseconds|
 
 * Data:
 
 ```
 "data": {
   'order_id': 10,
-  'position_id': 0,
   'market': 'BTCUSD',
   'type': 1,
   'side': 2,
-  'target': 2,
   'effect_type': 1,
+  'stop_type': 1,   // Stop Type 1: Trigger at the latest price 2: Trigger at the mark price 3: Trigger at
   'user_id': 10,
   'create_time': 102001.123,
   'update_time': 102003.123,
-  'source': 'API',
+  'source': 'web',
+  'client_id': 'abc',
+  'state': 1,
+  'stop_price': '9200',
   'price': '9100.1',
   'amount': '100',
   'taker_fee': '0.005',
   'maker_fee': '-0.002',
-  'left': '80',         // Unexecuted Amount
-  'deal_stock': '0.9',  // Executed Value
-  'deal_fee': '0.01',   // Used Tx Fees
-  'leverage': '10',     // Leverage 
-  'position_type': 1    // Position Type 1: Isolated Margin 2: Cross Margin
+  'status': "not_deal" //not_deal: unexecuted, activated: active success, fail: active fail, cancel: cancelled;
 }
 ```
 
-**Put market close order**
+# Position api
 
-* Request type: POST
-* Signature required: Yes
-* Request Header: Authorization: "xxxx"，"AccessId": "xxx"
-* Request Url: https://api.coinex.com/perpetual/v1/order/close_market
-* Request parameter:
-
-| name | type | required | description |
-| ------ | ------ | ------ | ------ |
-| market | String | Yes | Perpetual Market |
-| position_id | Integer | Yes | Position ID |
-| timestamp | Integer | Yes | Timestamp in milliseconds|
-| windowtime | Integer | No | Window time in milliseconds|
-
-* Data:
-
-```
-"data": {
-  'order_id': 10,
-  'position_id': 0,
-  'market': 'BTCUSD',
-  'type': 1,
-  'side': 2,
-  'target': 2,
-  'effect_type': 1,
-  'user_id': 10,
-  'create_time': 102001.123,
-  'update_time': 102003.123,
-  'source': 'API',
-  'price': '9100.1',
-  'amount': '100',
-  'taker_fee': '0.005',
-  'maker_fee': '-0.002',
-  'left': '80',         // Unexecuted Amount
-  'deal_stock': '0.9',  // Executed Value
-  'deal_fee': '0.01',   // Used Tx Fees
-  'leverage': '10',     // Leverage 
-  'position_type': 1   // Position Type 1: Isolated Margin 2: Cross Margin
-}
-```
-
-## Position api
-
-**Query pending position**
+### Query pending position
 
 * Request type: GET
 * Signature required: Yes
@@ -1075,20 +1199,20 @@ Request parameters are put into http body in the form of application/x-www-form-
     'open_val_max': '0.2', // Max. Opening Value
     'open_margin': '0.01', // Margin Rate
     'mainten_margin': '0.005', // Maintenance Margin Rate
-    'mainten_margin_amount': '0.015', // Maintenance Margin 
-    'margin_amount': '1.2',  // Margin Amount = Initial Margin + Increased Margin - Transferred Margin 
+    'mainten_margin_amount': '0.015', // Maintenance Margin
+    'margin_amount': '1.2',  // Margin Amount = Initial Margin + Increased Margin - Transferred Margin
     'profit_real': '0.1',    // Realized PNL
     'profit_clearing': "-1.1", // Unrealized PNL
     'liq_price': '11.22'。     // Forced Liquidation Price, when it is greater than 1000000000000, back to "Infinity"
     'bkr_price': '11',         // Bankruptcy Price, when it is greater than 1000000000000, back to "Infinity"
     'leverage': '10',       // Leverage
-    'adl_sort': 100,        // Sort Auto-leveraging 
+    'adl_sort': 100,        // Sort Auto-leveraging
     'total': 10             // Total Holders
   }
 ]
 ```
 
-**Query User Funding History**
+### Query User Funding History
 
 * Request type: GET
 * Signature required: Yes
@@ -1107,30 +1231,30 @@ Request parameters are put into http body in the form of application/x-www-form-
 
 ```
 "data": {
-	"offset": 10,
-	"limit": 100,
-	"records": [
-		{
-			"user_id": 8888,
-			"time": 1622548800.916702,
-			"market": "BTCUSD",
-			"asset": "BTC",
-			"type": 1, //1: pay, 2: receive
-			"position_id": 1111,
-			"side": 1, //1: short position, 2: long position
-			"amount": "3500",
-			"price": "35000",
-			"funding_rate": "0.00175", //funding rate
-			"real_funding_rate": "0.00175", //real funding rate
-			"funding": "-0.000175",
-			"value": "0.1", //position value
-		}
-   		...
-	]
+  "offset": 10,
+  "limit": 100,
+  "records": [
+    {
+      "user_id": 8888,
+      "time": 1622548800.916702,
+      "market": "BTCUSD",
+      "asset": "BTC",
+      "type": 1, //1: pay, 2: receive
+      "position_id": 1111,
+      "side": 1, //1: short position, 2: long position
+      "amount": "3500",
+      "price": "35000",
+      "funding_rate": "0.00175", //funding rate
+      "real_funding_rate": "0.00175", //real funding rate
+      "funding": "-0.000175",
+      "value": "0.1", //position value
+    }
+       ...
+  ]
 }
 ```
 
-**Ajust position margin**
+### Ajust position margin
 
 * Request type: POST
 * Signature required: Yes
@@ -1166,13 +1290,13 @@ Request parameters are put into http body in the form of application/x-www-form-
   'open_margin': '0.01', // Margin Rate
   'mainten_margin': '0.005', // Maintenance Margin Rate
   'mainten_margin_amount': '0.015', // Maintenance Margin
-  'margin_amount': '1.2',  // Margin Amount = Initial Margin + Increased Margin - Transferred Margin 
+  'margin_amount': '1.2',  // Margin Amount = Initial Margin + Increased Margin - Transferred Margin
   'profit_real': '0.1',    // Realized PNL
   'profit_clearing': "-1.1", // Unrealized PNL
   'liq_price': '11.22'。     //Forced Liquidation Price, when it is greater than 1000000000000, back to "Infinity"
   'bkr_price': '11',         //Bankruptcy Price, when it is greater than 1000000000000, back to "Infinity"
   'leverage': '10',   // Leverage
-  'adl_sort': 100,        // Sort Auto-leveraging 
-  'total': 10             // Total Holders 
+  'adl_sort': 100,        // Sort Auto-leveraging
+  'total': 10             // Total Holders
 }
 ```
