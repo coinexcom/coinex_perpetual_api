@@ -882,7 +882,7 @@ Request parameters are put into http body in the form of application/x-www-form-
 
 | name | type | required | description |
 | ------ | ------ | ------ | ------ |
-| market | String | Y | Perpetual Market, e.g. BTCUSD |
+| market | String | Y | Perpetual Market, e.g. BTCUSD, null or empty for all orders |
 | side | Integer | Y | 0:All 1: Sell, 2: Buy |
 | offset | Integer |  Y | Offset, means query from a certain record |
 | limit | Integer |  Y | The number of records acquired at a time, the default is 20 and the maximum is 100. |
