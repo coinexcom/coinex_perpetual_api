@@ -369,6 +369,48 @@
 }
 ```
 
+* Subscribe full depth
+
+```
+//Request
+{
+  "method": "depth.subscribe_full"
+  "params": [
+      "BTCBCH",               #1.market: See<API invocation description·market>
+      5,                      #2.limit: Count limit
+      "0"                     #3.interval: Merge，String
+  ],
+  "id": null
+}
+
+//notify
+{
+  "method": "depth.update",
+  "params": [
+    false,                 //Boolean, true: for complete result，false: for update based on latest retrun result
+    {                      //Update info
+        "bids": [          //Depth of Buy
+          [
+            "12.25",       //Buy in price
+            "0.0588"       //Buy in count
+          ]
+        ],
+        "asks": [          //Depth of Sell
+          [
+            "12.94",       //Sell out price
+            "0.1524"       //Sell out count
+          ]
+        ]，
+        "last": "3740",
+        "time": 111111,
+        "sign_price": "3750",
+        "index_price": "3750"
+    }
+  ],
+  "id": null
+}
+```
+
 ## Latest executed deal API
 
 * Acquire latest executed deal list
