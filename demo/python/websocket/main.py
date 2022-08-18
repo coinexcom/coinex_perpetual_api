@@ -48,7 +48,7 @@ class websocketTest(object):
     def depth_process(self, message):
         clean = message['params'][0]
         depth_data = message['params'][1]
-        checksum = message['params'][1]['checksum']
+        checksum = depth_data['checksum']
         if clean:
             self.order_bids.clear()
             for item in depth_data['bids']:
